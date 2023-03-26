@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails sur la location</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../css/styles.css" crossorigin="anonymous" />
+</head>
+<body>
+<div class="container bg-light p-3 rounded">
+    <h1 class="mt-5 mb-3">Détails sur la location</h1>
+    <a href="/location/liste" class="btn btn-secondary">Retour</a>
+
+    <div th:if="${param.message}" class="alert alert-success font-weight-bold">
+        <h3 th:text="${param.message}"></h3>
+    </div>
+
+    <div th:if="${param.message_error}" class="alert alert-danger font-weight-bold">
+        <h3 th:text="${param.message_error}"></h3>
+    </div>
+    <div class="row mb-5 mt-3">
+        <div class="col-sm-6">
+            <h2>Détails de la location</h2>
+            <table class="table mt-5">
+                <tbody>
+                <tr>
+                    <th scope="row">Date Debut :</th>
+                    <td th:text="${location.dateDebut}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Date Fin :</th>
+                    <td th:text="${location.dateFin}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Heure de début :</th>
+                    <td th:text="${location.heureDebut}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Heure de fin :</th>
+                    <td th:text="${location.heureFin}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Lieu :</th>
+                    <td th:text="${location.lieu}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            <h2>Camionnette de la location</h2>
+            <table class="table mt-5">
+                <tbody>
+                <tr>
+                    <th scope="row">Modele :</th>
+                    <td th:text="${location.camionnette.modele}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Marque :</th>
+                    <td th:text="${location.camionnette.marque}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Carburant :</th>
+                    <td th:text="${location.camionnette.carburant}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<h2>Client inscrits à la location</h2>
+
+<a th:href="@{/location/{locationId}/ajoutClient/(locationId=${locationId})}" class="btn btn-primary">Ajouter un client</a>
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+        <th>Supprimer</th>
+    </tr>
+        </thead>
+        <tbody>
+    <tr th:each="client : ${location.clients}">
+        <td th:text="${client.nom}"></td>
+        <td th:text="${client.prenom}"></td>
+        <td th:text="${client.email}"></td>
+        <td th:text="${client.telephone}"></td>
+        <td><a th:href="@{/location/{id}/supprimerClient/{clientId}(id=${location.id}, clientId=${client.id})}" class="btn btn-danger">Supprimer</a></td>
+    </tr>
+        </tbody>
+</table>
+</div>
+
+</body>
+</html>

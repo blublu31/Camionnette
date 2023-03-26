@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Création d'une location</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/styles.css" crossorigin="anonymous" />
+</head>
+
+<body>
+<div class="container bg-light p-3 rounded">
+        <h1>Création d'une location</h1>
+        <p><a href="/" class="btn btn-secondary">Retour à l'accueil</a></p>
+
+    <form class="form-horizontal" action="#" th:action="@{/location/creer}" th:object="${location}" method="post">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="dateDebut">Date Debut:</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="datedebut" th:field="*{dateDebut}" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="dateFin">Date Fin:</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="datefin" th:field="*{dateFin}" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="heureDebut">Heure de début :</label>
+            <div class="col-sm-10">
+                <input type="time" class="form-control" id="heureDebut" th:field="*{heureDebut}" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="heureFin">Heure de fin :</label>
+            <div class="col-sm-10">
+                <input type="time" class="form-control" id="heureFin" th:field="*{heureFin}" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="lieu">Lieu :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lieu" th:field="*{lieu}" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="camionnette">Camionnette :</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="camionnette" name="camionnette.id" required>
+                    <option th:each="camionnette : ${camionnettes}"
+                            th:value="${camionnette.id}"
+                            th:text="${camionnette.marque+' '+camionnette.modele + ' ('+camionnette.carburant+')'}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary mt-3">Valider</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

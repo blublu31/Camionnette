@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Modification d'une camionnette</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../css/styles.css" crossorigin="anonymous" />
+</head>
+
+<body>
+<div class="container bg-light p-3 rounded">
+        <h1>Modification d'une camionnette</h1>
+        <p><a href="/camionnette/liste" class="btn btn-secondary">Retour à la liste des camionnettes</a></p>
+        
+        <form th:object="${camionnette}" th:action="@{${'/camionnette/modifier/' + camionnette.id}}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="modele">Modele :</label>
+                <input type="text" class="form-control" id="modele" th:field="*{modele}" required />
+            </div>
+
+            <div class="form-group">
+                <label for="marque">Marque :</label>
+                <input type="text" class="form-control" id="marque" th:field="*{marque}" required />
+            </div>
+
+            <div class="form-group">
+                <label for="carburant">Carburant :</label>
+                <input type="text" class="form-control" id="carburant" th:field="*{carburant}" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Modifier</button>
+        </form>
+    </div>
+</body>
+
+</html>
